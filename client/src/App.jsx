@@ -16,7 +16,6 @@ import TenantsPage from './pages/Tenants/TenantsPage';
 
 
 function App() {
-  const [count, setCount] = useState(0)
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
 
