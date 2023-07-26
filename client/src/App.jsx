@@ -1,34 +1,49 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import Sidebar from './components/global/Sidebar'
+import Topbar from './components/global/Topbar'
+import { ColorModeContext, useMode } from "./theme";
+import Dashboard from './pages/Dashboard/Dashboard';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import Pauments from './pages/Payments/Pauments';
+import CalendarPage from './pages/Calendar/CalendarPage';
+import HousePage from './pages/House/HousePage';
+import LeasePage from './pages/Lease/LeasePage';
+import MessagesPage from './pages/Messages/MessagesPage';
+import ProfilePage from './pages/Profile/ProfilePage';
+import FaqsPage from './pages/Faqs/FaqsPage';
+import TenantsPage from './pages/Tenants/TenantsPage';
+
 
 function App() {
   const [count, setCount] = useState(0)
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+          <div className="app" >
+            <Sidebar isSidebar={isSidebar} />
+            <main >
+              <Topbar setIsSidebar={setIsSidebar} />
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/tenants" element={<TenantsPage />} />
+                <Route path="/payments" element={<Pauments />} />
+                <Route path="/calendar" element={<CalendarPage />} />
+                <Route path="/house" element={<HousePage />} />
+                <Route path="/lease" element={<LeasePage />} />
+                <Route path="/messages" element={<MessagesPage />} />
+                <Route path="/profile" element={<ProfilePage />} /> 
+                <Route path="/calendar" element={<CalendarPage />} /> 
+                <Route path="/faqs" element={<FaqsPage />} />
+              </Routes> 
+            </main>
+          </div>
+        </ThemeProvider>
+        </ColorModeContext.Provider>
   )
 }
 
