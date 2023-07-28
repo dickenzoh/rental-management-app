@@ -12,6 +12,43 @@ import StatBox from "../../components/StatBox/StatBox";
 import ProgressCircle from "../../components/ProgressCircle/ProgressCircle";
 //import LineChart from "../../components/LineChart/LineChart";
 import BarChart from "../../components/BarChart/BarChart";
+import PowerConsumptionChart from "../../components/BarChart/PowerBarChart";
+
+const rentalData = {
+  totalProperties: 50,
+  totalRentalIncome: "$25,000",
+  occupancyRate: "90%",
+  incomeData: [
+    { month: "Jan", income: 3000 },
+    { month: "Feb", income: 3500 },
+    { month: "Mar", income: 3200 },
+  ],
+  recentTransactions: [
+    {
+      txId: "TX001",
+      user: "John Doe",
+      date: "2023-07-26",
+      cost: 1200,
+    },
+    {
+      txId: "TX002",
+      user: "Jane Smith",
+      date: "2023-07-25",
+      cost: 1800,
+    },
+  ],
+  salesData: [
+    { category: "Apartment", sales: 20 },
+    { category: "House", sales: 15 },
+    { category: "Condo", sales: 10 },
+  ],
+  geographyData: [
+    { location: "New York", traffic: 500 },
+    { location: "Los Angeles", traffic: 450 },
+    { location: "Chicago", traffic: 300 },
+  ],
+};
+
 
 
 
@@ -23,7 +60,7 @@ const Dashboard = () => {
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+        <Header title="DASHBOARD" subtitle="Welcome to your rental dashboard" />
 
         <Box>
           <Button
@@ -48,7 +85,6 @@ const Dashboard = () => {
         gridAutoRows="140px"
         gap="20px"
       >
-        {/* ROW 1 */}
         <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
@@ -57,8 +93,8 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="12,361"
-            subtitle="Emails Sent"
+            title={rentalData.totalProperties}
+            subtitle="Total Properties"
             progress="0.75"
             increase="+14%"
             icon={
@@ -76,12 +112,12 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="431,225"
-            subtitle="Sales Obtained"
+            title={rentalData.totalRentalIncome}
+            subtitle="Total Rental Income"
             progress="0.50"
             increase="+21%"
             icon={
-              <PointOfSaleIcon
+              <EmailIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -95,12 +131,12 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="32,441"
-            subtitle="New Clients"
+            title={rentalData.occupancyRate}
+            subtitle="Occupancy Rate"
             progress="0.30"
             increase="+5%"
             icon={
-              <PersonAddIcon
+              <EmailIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -113,20 +149,7 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <StatBox
-            title="1,325,134"
-            subtitle="Traffic Received"
-            progress="0.80"
-            increase="+43%"
-            icon={
-              <TrafficIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
         </Box>
-
-        {/* ROW 2 */}
         <Box
           gridColumn="span 8"
           gridRow="span 2"
@@ -145,14 +168,14 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Revenue Generated
+                Rental Income Over Time
               </Typography>
               <Typography
                 variant="h3"
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
+                {rentalData.rentalIncomeOverTime}
               </Typography>
             </Box>
             <Box>
@@ -164,7 +187,7 @@ const Dashboard = () => {
             </Box>
           </Box>
           <Box height="250px" m="-20px 0 0 0">
-            {/* <LineChart isDashboard={true} /> */}
+            {/* <LineChart /> */}
           </Box>
         </Box>
         <Box
@@ -185,7 +208,7 @@ const Dashboard = () => {
               Recent Transactions
             </Typography>
           </Box>
-          {mockTransactions.map((transaction, i) => (
+          {rentalData.recentTransactions.map((transaction, i) => (
             <Box
               key={`${transaction.txId}-${i}`}
               display="flex"
@@ -194,7 +217,7 @@ const Dashboard = () => {
               borderBottom={`4px solid ${colors.primary[500]}`}
               p="15px"
             >
-              <Box >
+              <Box>
                 <Typography
                   color={colors.greenAccent[500]}
                   variant="h5"
@@ -206,6 +229,7 @@ const Dashboard = () => {
                   {transaction.user}
                 </Typography>
               </Box>
+              <Box color={colors.grey[100]}>{transaction.date}</Box>
               <Box color={colors.grey[100]}>{transaction.date}</Box>
               <Box
                 backgroundColor={colors.greenAccent[500]}
@@ -226,7 +250,7 @@ const Dashboard = () => {
           p="30px"
         >
           <Typography variant="h5" fontWeight="600">
-            Campaign
+            Water Usage
           </Typography>
           <Box
             display="flex"
@@ -240,7 +264,7 @@ const Dashboard = () => {
               color={colors.greenAccent[500]}
               sx={{ mt: "15px" }}
             >
-              $48,352 revenue generated
+              48,352 KMH
             </Typography>
             <Typography>Includes extra misc expenditures and costs</Typography>
           </Box>
@@ -255,10 +279,11 @@ const Dashboard = () => {
             fontWeight="600"
             sx={{ padding: "30px 30px 0 30px" }}
           >
-            Sales Quantity
+            Power Consumption
           </Typography>
           <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
+            <BarChart data={rentalData.salesData} />
+             <PowerConsumptionChart />
           </Box>
         </Box>
         <Box
@@ -272,10 +297,10 @@ const Dashboard = () => {
             fontWeight="600"
             sx={{ marginBottom: "15px" }}
           >
-            Geography Based Traffic
+            Over View
           </Typography>
           <Box height="200px">
-            <GeographyChart isDashboard={true} />
+            <GeographyChart data={rentalData.geographyData} />
           </Box>
         </Box>
       </Box>

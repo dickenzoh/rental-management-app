@@ -5,14 +5,14 @@ import Topbar from './components/global/Topbar'
 import { ColorModeContext, useMode } from "./theme";
 import Dashboard from './pages/Dashboard/Dashboard';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import Pauments from './pages/Payments/Pauments';
 import CalendarPage from './pages/Calendar/CalendarPage';
-import HousePage from './pages/House/HousePage';
 import LeasePage from './pages/Lease/LeasePage';
-import MessagesPage from './pages/Messages/MessagesPage';
 import ProfilePage from './pages/Profile/ProfilePage';
 import FaqsPage from './pages/Faqs/FaqsPage';
 import TenantsPage from './pages/Tenants/TenantsPage';
+import MassagesPage from './pages/Messages/MessagesPage';
+import PaymentsPage from './pages/Payments/PaymentsPage';
+import HousesPage from './pages/House/HousePage';
 
 
 function App() {
@@ -25,16 +25,16 @@ function App() {
         <CssBaseline />
           <div className="app" >
             <Sidebar isSidebar={isSidebar} />
-            <main >
+            <main style={{ width: '100%' }}>
               <Topbar setIsSidebar={setIsSidebar} />
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/tenants" element={<TenantsPage />} />
-                <Route path="/payments" element={<Pauments />} />
+                <Route path="/payments" element={<PaymentsPage />} />
                 <Route path="/calendar" element={<CalendarPage />} />
-                <Route path="/house" element={<HousePage />} />
+                <Route path="/house" element={<HousesPage />} />
                 <Route path="/lease" element={<LeasePage />} />
-                <Route path="/messages" element={<MessagesPage />} />
+                <Route path="/messages" element={<MassagesPage />} />
                 <Route path="/profile" element={<ProfilePage />} /> 
                 <Route path="/calendar" element={<CalendarPage />} /> 
                 <Route path="/faqs" element={<FaqsPage />} />
