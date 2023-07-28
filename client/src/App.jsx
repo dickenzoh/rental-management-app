@@ -8,7 +8,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import CalendarPage from './pages/Calendar/CalendarPage';
 import LeasePage from './pages/Lease/LeasePage';
 import ProfilePage from './pages/Profile/ProfilePage';
-import FaqsPage from './pages/Faqs/FaqsPage';
+import FaqsPage from './pages/FaqsPage/FaqsPage';
 import TenantsPage from './pages/Tenants/TenantsPage';
 import MassagesPage from './pages/Messages/MessagesPage';
 import PaymentsPage from './pages/Payments/PaymentsPage';
@@ -28,7 +28,7 @@ function App() {
             <main style={{ width: '100%' }}>
               <Topbar setIsSidebar={setIsSidebar} />
               <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/" element={<TenantsPage />} />
                 <Route path="/tenants" element={<TenantsPage />} />
                 <Route path="/payments" element={<PaymentsPage />} />
                 <Route path="/calendar" element={<CalendarPage />} />
