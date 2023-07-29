@@ -1,8 +1,9 @@
 import React from 'react';
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, Fab, Typography, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { tokens } from "../../theme";
 import profile from '../../images/user.png';
+import EditProfileModal from '../../components/Modals/EditProfile';
 
 const useStyles = makeStyles((theme) => ({
   profileContainer: {
@@ -18,21 +19,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const user = {
+  name: 'John Doe',
+  age: 28,
+  email: 'john.doe@example.com',
+  avatarUrl: 'https://via.placeholder.com/150',
+  address: '123 Main St, City, Country',
+  phoneNumber: '123-456-7890',
+};
+
 const ProfilePage = () => {
   const classes = useStyles();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  // Replace this with your actual user data or fetch it from an API
-  const user = {
-    name: 'John Doe',
-    age: 28,
-    email: 'john.doe@example.com',
-    avatarUrl: 'https://via.placeholder.com/150', // Replace with the URL of the user's avatar image
-  };
-
   return (
-    <Box mb="25px">
+    <Box mb="25px" >
+      <EditProfileModal />
               <Box display="flex" justifyContent="center" alignItems="center">
                 <img
                   alt="profile-user"
@@ -55,6 +58,20 @@ const ProfilePage = () => {
                   Admin
                 </Typography>
               </Box>
+              <Box textAlign="center">
+        <Typography variant="h4" color={colors.grey[100]}>
+          Age: {user.age}
+        </Typography>
+        <Typography variant="h4" color={colors.grey[100]}>
+          Email: {user.email}
+        </Typography>
+        <Typography variant="h4" color={colors.grey[100]}>
+          Address: {user.address}
+        </Typography>
+        <Typography variant="h4" color={colors.grey[100]}>
+          Phone Number: {user.phoneNumber}
+        </Typography>
+      </Box>
             </Box>
   );
 };
