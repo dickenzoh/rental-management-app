@@ -1,11 +1,22 @@
-import { Typography, Box, useTheme } from "@mui/material";
+import { Typography, Box, useTheme, IconButton } from "@mui/material";
 import { tokens } from "../../theme";
+import AddModal from "../Modals/AddModal";
+import { useLocation } from "react-router-dom";
 
 const Header = ({ title, subtitle }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const location = useLocation();
+  const locationPath = location.pathname;
+
+  const handleCreate = () => {
+    console.log('created')
+  }
+
   return (
-    <Box mb="30px">
+    <Box mb="30px" sx={{display: "flex", justifyContent: "space-between"}} >
+      <Box>
       <Typography
         variant="h2"
         color={colors.grey[100]}
@@ -17,6 +28,10 @@ const Header = ({ title, subtitle }) => {
       <Typography variant="h5" color={colors.greenAccent[400]}>
         {subtitle}
       </Typography>
+      </Box>
+      {locationPath === "/messages" || locationPath === "/" ? null : <AddModal title="Add Tena"  />}
+    
+    
     </Box>
   );
 };

@@ -13,6 +13,7 @@ import TenantsPage from './pages/Tenants/TenantsPage';
 import MassagesPage from './pages/Messages/MessagesPage';
 import PaymentsPage from './pages/Payments/PaymentsPage';
 import HousesPage from './pages/House/HousePage';
+import SettingsPage from './pages/Settings/SettingsPage';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
                 <Route path="/lease" element={<LeasePage />} />
                 <Route path="/messages" element={<MassagesPage />} />
                 <Route path="/profile" element={<ProfilePage />} /> 
+                <Route path="/settings" element={<SettingsPage />} /> 
                 <Route path="/calendar" element={<CalendarPage />} /> 
                 <Route path="/faqs" element={<FaqsPage />} />
               </Routes> 
